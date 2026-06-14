@@ -1,0 +1,11 @@
+baseURL = 'https://lxryumin-best.github.io/'
+languageCode = 'en-us'
+title = 'RAV-diary: Infrastructure & DevOps'
+theme = 'PaperMod'
+
+[params]
+  env = 'production'
+  description = 'Engineering diary and professional portfolio'
+  author = 'RAV'
+  ShowReadingTime = true
+  ShowPostNavLinks = true
