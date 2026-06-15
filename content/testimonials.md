@@ -1,6 +1,5 @@
 ---
 title: "Client Testimonials & Letters of Recommendation"
-layout: "archives"
 ---
 
 Throughout my career, I have acted as a strategic IT partner for federal-scale businesses, ensuring zero-downtime execution and uncompromising reliability. 
