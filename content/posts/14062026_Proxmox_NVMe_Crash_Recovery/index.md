@@ -31,7 +31,7 @@ mount -o ro /dev/sda2 /mnt/samsung/  # EXT4 recovery mount
 mount -o ro /dev/sdb1 /mnt/wdc/      # XFS recovery mount
 
 # 4. Successfully copied recent unbacked-up delta documents to safety
-
+```
 {{< gallery >}}
 
 The Takeaway (Business Value):
