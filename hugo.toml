@@ -1,11 +1,66 @@
 baseURL = 'https://lxryumin-best.github.io/'
-languageCode = 'en-us'
-title = 'RAV-diary: Infrastructure & DevOps'
+title = 'Aleksei Riumin | Senior Infrastructure Architect'
 theme = 'PaperMod'
 
-[params]
-  env = 'production'
-  description = 'Engineering diary and professional portfolio'
-  author = 'RAV'
-  ShowReadingTime = true
-  ShowPostNavLinks = true
+defaultContentLanguage = 'en'
+
+# --- АНГЛИЙСКАЯ ВЕРСИЯ (Главная) ---
+[languages.en]
+  languageCode = 'en-us'
+  languageName = 'English'
+  weight = 1
+  
+  [languages.en.params]
+    description = 'Senior IT Infrastructure & Network Architect | Enterprise IT Consulting'
+    author = 'Aleksei Riumin'
+    ShowReadingTime = true
+
+  [languages.en.params.profileMode]
+    enabled = true
+    title = "Hello! I am Aleksei Riumin"
+    subtitle = "Senior IT Infrastructure & Network Architect with 20+ years of experience. I transform complex business requirements into resilient, scalable, and secure IT foundations with zero-downtime execution."
+    imageUrl = "avatar.jpg" # Сюда мы позже загрузим ваше фото
+    imageWidth = 150
+    imageHeight = 150
+    imageTitle = "Aleksei Riumin"
+    
+    # Кнопки на главной странице
+    [[languages.en.params.profileMode.buttons]]
+      name = "Engineering Cases"
+      url = "/posts/"
+    [[languages.en.params.profileMode.buttons]]
+      name = "Client Testimonials"
+      url = "/testimonials/"
+    [[languages.en.params.profileMode.buttons]]
+      name = "Contact Me"
+      url = "mailto:nimxela@gmail.com"
+
+# --- РУССКАЯ ВЕРСИЯ ---
+[languages.ru]
+  languageCode = 'ru-ru'
+  languageName = 'Русский'
+  weight = 2
+  
+  [languages.ru.params]
+    description = 'Senior IT Infrastructure & Network Architect | ИТ-Консалтинг'
+    author = 'Алексей Рюмин'
+    ShowReadingTime = true
+
+  [languages.ru.params.profileMode]
+    enabled = true
+    title = "Здравствуйте! Я Алексей Рюмин"
+    subtitle = "Senior IT Infrastructure Architect (20+ лет опыта). Я проектирую отказоустойчивые серверные и сетевые инфраструктуры для бизнеса. Мой приоритет — безопасность данных и миграции без минутного простоя."
+    imageUrl = "avatar.jpg"
+    imageWidth = 150
+    imageHeight = 150
+    imageTitle = "Алексей Рюмин"
+    
+    [[languages.ru.params.profileMode.buttons]]
+      name = "Инженерные кейсы"
+      url = "/posts/"
+    [[languages.ru.params.profileMode.buttons]]
+      name = "Благодарственные письма"
+      url = "/testimonials/"
+    [[languages.ru.params.profileMode.buttons]]
+      name = "Связаться со мной"
+      url = "mailto:nimxela@gmail.com"
