@@ -57,10 +57,12 @@ defaultContentLanguage = 'en'
     
     [[languages.ru.params.profileMode.buttons]]
       name = "Инженерные кейсы"
-      url = "/posts/"
+      url = "/ru/posts/"
+      
     [[languages.ru.params.profileMode.buttons]]
       name = "Благодарственные письма"
-      url = "/testimonials/"
+      url = "/ru/testimonials/"
+      
     [[languages.ru.params.profileMode.buttons]]
       name = "Связаться со мной"
       url = "mailto:nimxela@gmail.com"
