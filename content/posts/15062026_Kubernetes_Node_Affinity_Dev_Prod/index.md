@@ -50,7 +50,7 @@ spec:
                 operator: In
                 values:
                 - production
-
+yaml```
 {{< gallery >}}
 
 The Takeaway (Бизнес-результат):
