@@ -26,6 +26,9 @@ defaultContentLanguage = 'en'
     
     # Кнопки на главной странице
     [[languages.en.params.profileMode.buttons]]
+      name = "Clients"
+      url = "/clients/"
+    [[languages.en.params.profileMode.buttons]]
       name = "Engineering Cases"
       url = "/posts/"
     [[languages.en.params.profileMode.buttons]]
@@ -54,6 +57,10 @@ defaultContentLanguage = 'en'
     imageWidth = 150
     imageHeight = 150
     imageTitle = "Алексей Рюмин"
+
+    [[languages.ru.params.profileMode.buttons]]
+      name = "Клиенты"
+      url = "/ru/clients/"
     
     [[languages.ru.params.profileMode.buttons]]
       name = "Инженерные кейсы"

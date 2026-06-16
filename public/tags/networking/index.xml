@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Networking on Aleksei Riumin | Senior Infrastructure Architect</title>
+    <link>http://localhost:1313/tags/networking/</link>
+    <description>Recent content in Networking on Aleksei Riumin | Senior Infrastructure Architect</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jun 2026 12:00:00 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Physics vs. Marketing: Real AV1300 PowerLine Speeds on Old Aluminum Wire</title>
+      <link>http://localhost:1313/posts/15062026_powerline_aluminum_mesh_bridge/</link>
+      <pubDate>Mon, 15 Jun 2026 12:00:00 +0300</pubDate>
+      <guid>http://localhost:1313/posts/15062026_powerline_aluminum_mesh_bridge/</guid>
+      <description>How to salvage a remote network link when underground conduits fail. Testing TP-Link AV1300 over 2-core aluminum and optimizing IP cameras for constrained links.</description>
+    </item>
+    <item>
+      <title>Welcome to My Digital Garden: Infrastructure &amp; DevOps</title>
+      <link>http://localhost:1313/posts/welcome/</link>
+      <pubDate>Sun, 14 Jun 2026 12:00:00 +0300</pubDate>
+      <guid>http://localhost:1313/posts/welcome/</guid>
+      <description>&lt;p&gt;Hello! I am an Infrastructure Architect, System Administrator, and Independent IT Consultant.&lt;/p&gt;
+&lt;p&gt;This repository serves as my engineering diary and professional portfolio. Here, I document everything from hands-on hardware repair to high-level network architecture and cloud-native solutions.&lt;/p&gt;
+&lt;h2 id=&#34;-what-i-do&#34;&gt;🛠 What I Do&lt;/h2&gt;
+&lt;p&gt;My expertise spans the entire IT stack—from the physical layer to advanced virtualization:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Network Architecture &amp;amp; Physical Infrastructure:&lt;/strong&gt; Designing, planning, and deploying local area networks. My most extensive hands-on project involved engineering a network utilizing over 4,500 meters of UTP cable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Server Virtualization &amp;amp; Management:&lt;/strong&gt; Building and maintaining high-availability clusters using Proxmox and Docker containerization.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IT Consulting &amp;amp; Business Support:&lt;/strong&gt; Operating as an independent contractor, I currently manage infrastructure and provide SLA-backed support for 23 corporate clients (ranging from 3 to 100 workstations per site).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hardware &amp;amp; Systems Troubleshooting:&lt;/strong&gt; Diagnosing and repairing servers, setting up IP/VoIP telephony, and integrating CCTV/Access Control systems.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-certifications--continuous-learning&#34;&gt;📚 Certifications &amp;amp; Continuous Learning&lt;/h2&gt;
+&lt;p&gt;I believe in a solid security foundation followed by advanced routing and orchestration:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

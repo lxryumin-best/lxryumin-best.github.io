@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kubernetes on Aleksei Riumin | Senior Infrastructure Architect</title>
+    <link>http://localhost:1313/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on Aleksei Riumin | Senior Infrastructure Architect</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jun 2026 10:00:00 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cost-Effective Kubernetes: Hardware Isolating Dev &amp; Prod Environments in a Single Cluster</title>
+      <link>http://localhost:1313/posts/15062026_kubernetes_node_affinity_dev_prod/</link>
+      <pubDate>Mon, 15 Jun 2026 10:00:00 +0300</pubDate>
+      <guid>http://localhost:1313/posts/15062026_kubernetes_node_affinity_dev_prod/</guid>
+      <description>Learn how to use Kubernetes Node Affinity to safely run Development and Production environments within a single cluster, saving B2B infrastructure costs.</description>
+    </item>
+  </channel>
+</rss>

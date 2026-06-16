@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>XFS Recovery on Aleksei Riumin | Senior Infrastructure Architect</title>
+    <link>http://localhost:1313/tags/xfs-recovery/</link>
+    <description>Recent content in XFS Recovery on Aleksei Riumin | Senior Infrastructure Architect</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Jun 2026 22:41:25 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/xfs-recovery/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proxmox Server Crash: Recovering XFS Data After a Catastrophic NVMe Failure</title>
+      <link>http://localhost:1313/posts/14062026_proxmox_nvme_crash_recovery/</link>
+      <pubDate>Sun, 14 Jun 2026 22:41:25 +0300</pubDate>
+      <guid>http://localhost:1313/posts/14062026_proxmox_nvme_crash_recovery/</guid>
+      <description>How to handle a sudden NVMe controller failure in Proxmox VE. Step-by-step XFS troubleshooting, read-only data salvage, and hardware migration.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Proxmox Server Crash: Recovering XFS Data After a Catastrophic NVMe Failure | Aleksei Riumin | Senior Infrastructure Architect</title>
+<meta name="keywords" content="Proxmox VE, XFS Recovery, NVMe, Incident Response, Data Salvage">
+<meta name="description" content="How to handle a sudden NVMe controller failure in Proxmox VE. Step-by-step XFS troubleshooting, read-only data salvage, and hardware migration.">
+<meta name="author" content="Aleksei Riumin">
+<link rel="canonical" href="http://localhost:1313/posts/14062026_proxmox_nvme_crash_recovery/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.89ca4972ab5e6aaa05e9a0dae0c4bb64b26585bc79e36f5cf33614eea0283abe.css" integrity="sha256-icpJcqteaqoF6aDa4MS7ZLJlhbx5429c8zYU7qAoOr4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/14062026_proxmox_nvme_crash_recovery/">
+<link rel="alternate" hreflang="ru" href="http://localhost:1313/ru/posts/14062026_proxmox_nvme_crash_recovery/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Aleksei Riumin | Senior Infrastructure Architect (Alt + H)">Aleksei Riumin | Senior Infrastructure Architect</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button><span class="nav-sep">|</span>
+                    <ul class="lang-menu">
+                        <li>
+                            <a href="http://localhost:1313/ru/" title="Русский"
+                                aria-label="Русский">Ru</a>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Proxmox Server Crash: Recovering XFS Data After a Catastrophic NVMe Failure
+    </h1>
+    <div class="post-description">
+      How to handle a sudden NVMe controller failure in Proxmox VE. Step-by-step XFS troubleshooting, read-only data salvage, and hardware migration.
+    </div>
+    <div class="post-meta">
+
+<span title='2026-06-14 22:41:25 +0300 MSK'>June 14, 2026</span>&nbsp;·&nbsp;<span>2 min</span>&nbsp;·&nbsp;<span>Aleksei Riumin</span>&nbsp;|&nbsp;<span>Translations:</span>
+    <ul class="i18n_list">
+        <li>
+            <a href="http://localhost:1313/ru/posts/14062026_proxmox_nvme_crash_recovery/">Ru</a>
+        </li>
+    </ul>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p><strong>The Context (Business Challenge / Problem):</strong>
+In enterprise infrastructure, hardware reliability is paramount, but every architect needs an R&amp;D environment to test limits. Recently, the primary 2TB NVMe drive (a budget-tier brand) in my Proxmox R&amp;D lab suffered a sudden, catastrophic controller failure. The hypervisor crashed, dropping into an <code>initramfs</code> boot loop. Standard filesystem checks (<code>fsck.xfs</code>) reported severe input/output errors, indicating hardware-level NAND or controller death. While a robust monthly backup strategy was in place, the &ldquo;delta&rdquo; data—crucial documents created over the last few weeks—was trapped on the failing drive. The objective was clear: diagnose the storage stack, salvage the recent documents without causing further corruption, and migrate the hypervisor to enterprise-grade hardware.</p>
+<p><strong>The Architecture &amp; Work (Solution):</strong>
+When dealing with failing flash memory, every write operation can be fatal. After booting from a Proxmox Live ISO into debugging mode, I mapped the LVM volumes and attempted a standard <code>xfs_repair</code>. When the NVMe threw raw I/O block errors (<code>libxfs_device_zero write failed</code>), I immediately aborted automated repairs to protect the remaining data structure. Instead, I pivoted to a manual data extraction strategy. I bypassed the corrupted root partitions and mounted the intact data partitions from secondary drives in strict <code>read-only</code> mode to safely extract the missing delta documents.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. Assessing the damage in Proxmox Debug Mode</span>
+</span></span><span style="display:flex;"><span>xfs_repair /dev/mapper/pve-root
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ERROR: Log needs to be replayed. Standard repair fails due to hardware fault.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Attempting to clear the corrupted log (last resort for XFS)</span>
+</span></span><span style="display:flex;"><span>xfs_repair -L /dev/mapper/pve-root
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Result: libxfs_device_zero write failed: Input/output error</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Conclusion: Physical NVMe controller failure confirmed.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Executing manual data salvage to external/secondary drives</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creating mount points for data extraction</span>
+</span></span><span style="display:flex;"><span>mkdir -p /mnt/samsung /mnt/wdc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mounting intact filesystems in STRICT READ-ONLY mode to prevent data degradation</span>
+</span></span><span style="display:flex;"><span>mount -o ro /dev/sda2 /mnt/samsung/  <span style="color:#75715e"># EXT4 recovery mount</span>
+</span></span><span style="display:flex;"><span>mount -o ro /dev/sdb1 /mnt/wdc/      <span style="color:#75715e"># XFS recovery mount</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Successfully copied recent unbacked-up delta documents to safety</span>
+</span></span></code></pre></div><div class="custom-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 2rem 0;">
+  
+    <a href="/posts/14062026_proxmox_nvme_crash_recovery/chrome_5BsOjGFa7M.png" target="_blank">
+      <img src="/posts/14062026_proxmox_nvme_crash_recovery/chrome_5BsOjGFa7M.png" alt="chrome_5BsOjGFa7M.png" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    </a>
+  
+</div>
+
+<p><strong>The Takeaway (Business Value):</strong>
+100% of the critical &ldquo;delta&rdquo; documents were successfully recovered before the failing NVMe drive died completely. The environment was seamlessly restored from the monthly backup onto a new, Tier-1 branded SSD with a 5-year enterprise warranty. For B2B clients, this incident underscores two golden rules: never compromise on primary storage hardware (Tier-1 only for production), and always ensure your IT partner has the deep Linux storage stack expertise (LVM, XFS, EXT4) required to manually extract data when automated recovery tools fail.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/proxmox-ve/">Proxmox VE</a></li>
+      <li><a href="http://localhost:1313/tags/xfs-recovery/">XFS Recovery</a></li>
+      <li><a href="http://localhost:1313/tags/nvme/">NVMe</a></li>
+      <li><a href="http://localhost:1313/tags/incident-response/">Incident Response</a></li>
+      <li><a href="http://localhost:1313/tags/data-salvage/">Data Salvage</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Aleksei Riumin | Senior Infrastructure Architect</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

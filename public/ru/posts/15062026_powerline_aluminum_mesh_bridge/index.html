@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Aleksei Riumin | Senior Infrastructure Architect</title>
+<meta name="keywords" content="">
+<meta name="description" content="title: &ldquo;Физика против Маркетинга: Реальная скорость AV1300 PowerLine на старом алюминии&rdquo;
+date: 2026-06-15T12:00:00&#43;03:00
+draft: false
+description: &ldquo;Как спасти линк до удаленного здания при обрыве подземной трассы. Тест TP-Link AV1300 на двухжильном алюминии и оптимизация камер под узкий канал.&rdquo;
+tags: [PowerLine, Infrastructure, Mesh, Видеонаблюдение, Сети]
+Контекст (Бизнес-задача / Проблема):
+На объекте клиента из-за движения грунта была безнадежно испорчена подземная монтажная труба, по которой шла оптика/витая пара до гаражного комплекса. Копать новые траншеи было долго и экономически нецелесообразно. При этом бизнесу требовалось срочно восстановить там сетевую инфраструктуру: обеспечить работу Mesh-зоны TP-Link, цифрового IP-домофона и камер видеонаблюдения. Единственной доступной физической средой оставался силовой кабель гаража — старый двухжильный алюминий на 220В без заземления.
+Архитектура и Реализация (Решение):
+Мы решили использовать PowerLine-адаптеры TP-Link TL-PA8033P KIT (AV1300). Как Senior-инженер, я не верю маркетинговым наклейкам про «1300 Мбит/с» и всегда замеряю реальный baseline. Тепличный тест, когда адаптеры вставлены друг в друга (минимальная дистанция), показал потолок в ~262 Мбит/с на загрузку.
+Но в боевых условиях правит физика. На трассе в 25 метров по двухжильному алюминию мы получили стабильные 88 Мбит/с. На длине 42 метра скорость просела до 59 Мбит/с. Для наших задач 88 Мбит/с — это отличный результат, но IP-камеры, домофон и пользователи Mesh-сети делят эту полосу. Чтобы исключить просадки и потери пакетов домофона, мы не стали городить сложную сегментацию, а оптимизировали саму нагрузку. Камеры были переведены на кодек H.265 с заниженным FPS и жестко заданным постоянным битрейтом (CBR), чтобы исключить всплески трафика при смене кадров.
+Ниже представлен Bash-скрипт, который мы использовали для массовой реконфигурации видеопотоков на камерах через API. Это позволило «зажать» видеонаблюдение в узкие рамки и оставить чистую полосу для Mesh-сети:">
+<meta name="author" content="Алексей Рюмин">
+<link rel="canonical" href="http://localhost:1313/ru/posts/15062026_powerline_aluminum_mesh_bridge/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.89ca4972ab5e6aaa05e9a0dae0c4bb64b26585bc79e36f5cf33614eea0283abe.css" integrity="sha256-icpJcqteaqoF6aDa4MS7ZLJlhbx5429c8zYU7qAoOr4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/15062026_powerline_aluminum_mesh_bridge/">
+<link rel="alternate" hreflang="ru" href="http://localhost:1313/ru/posts/15062026_powerline_aluminum_mesh_bridge/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/ru/" accesskey="h" title="Aleksei Riumin | Senior Infrastructure Architect (Alt + H)">Aleksei Riumin | Senior Infrastructure Architect</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button><span class="nav-sep">|</span>
+                    <ul class="lang-menu">
+                        <li>
+                            <a href="http://localhost:1313/" title="English"
+                                aria-label="English">En</a>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">
+
+<span>2 минуты</span>&nbsp;·&nbsp;<span>Алексей Рюмин</span>&nbsp;|&nbsp;<span>Переводы:</span>
+    <ul class="i18n_list">
+        <li>
+            <a href="http://localhost:1313/posts/15062026_powerline_aluminum_mesh_bridge/">En</a>
+        </li>
+    </ul>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>title: &ldquo;Физика против Маркетинга: Реальная скорость AV1300 PowerLine на старом алюминии&rdquo;
+date: 2026-06-15T12:00:00+03:00
+draft: false
+description: &ldquo;Как спасти линк до удаленного здания при обрыве подземной трассы. Тест TP-Link AV1300 на двухжильном алюминии и оптимизация камер под узкий канал.&rdquo;
+tags: [PowerLine, Infrastructure, Mesh, Видеонаблюдение, Сети]
+Контекст (Бизнес-задача / Проблема):
+На объекте клиента из-за движения грунта была безнадежно испорчена подземная монтажная труба, по которой шла оптика/витая пара до гаражного комплекса. Копать новые траншеи было долго и экономически нецелесообразно. При этом бизнесу требовалось срочно восстановить там сетевую инфраструктуру: обеспечить работу Mesh-зоны TP-Link, цифрового IP-домофона и камер видеонаблюдения. Единственной доступной физической средой оставался силовой кабель гаража — старый двухжильный алюминий на 220В без заземления.
+Архитектура и Реализация (Решение):
+Мы решили использовать PowerLine-адаптеры TP-Link TL-PA8033P KIT (AV1300). Как Senior-инженер, я не верю маркетинговым наклейкам про «1300 Мбит/с» и всегда замеряю реальный baseline. Тепличный тест, когда адаптеры вставлены друг в друга (минимальная дистанция), показал потолок в ~262 Мбит/с на загрузку.
+Но в боевых условиях правит физика. На трассе в 25 метров по двухжильному алюминию мы получили стабильные 88 Мбит/с. На длине 42 метра скорость просела до 59 Мбит/с. Для наших задач 88 Мбит/с — это отличный результат, но IP-камеры, домофон и пользователи Mesh-сети делят эту полосу. Чтобы исключить просадки и потери пакетов домофона, мы не стали городить сложную сегментацию, а оптимизировали саму нагрузку. Камеры были переведены на кодек H.265 с заниженным FPS и жестко заданным постоянным битрейтом (CBR), чтобы исключить всплески трафика при смене кадров.
+Ниже представлен Bash-скрипт, который мы использовали для массовой реконфигурации видеопотоков на камерах через API. Это позволило «зажать» видеонаблюдение в узкие рамки и оставить чистую полосу для Mesh-сети:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># Оптимизация потоков IP-камер (Dahua/Hikvision) для узких PowerLine (PLC) линков</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Принудительно включаем H.265, 15 FPS и жесткий битрейт (CBR) 2048 Kbps</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CAMERAS<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;192.168.20.51&#34;</span> <span style="color:#e6db74">&#34;192.168.20.52&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>USER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span>PASS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;SuperSecretAdminPass!&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> IP in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>CAMERAS[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;[INFO] Обновление профиля видео для камеры: </span>$IP<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Пример ISAPI-запроса для применения лимитов пропускной способности</span>
+</span></span><span style="display:flex;"><span>  curl -s -T payload_h265_cbr.xml <span style="color:#e6db74">&#34;http://</span>$USER<span style="color:#e6db74">:</span>$PASS<span style="color:#e6db74">@</span>$IP<span style="color:#e6db74">/ISAPI/Streaming/channels/101&#34;</span> -X PUT
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Структура применяемого payload_h265_cbr.xml:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># &lt;videoCodecType&gt;H.265&lt;/videoCodecType&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># &lt;videoQuality&gt;MatchType&lt;/videoQuality&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># &lt;constantBitRate&gt;2048&lt;/constantBitRate&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># &lt;fixedFrameRate&gt;15&lt;/fixedFrameRate&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[SUCCESS] Потоки камер ограничены. Канал PLC разгружен для Mesh и VoIP.&#34;</span>
+</span></span></code></pre></div><div class="custom-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 2rem 0;">
+  
+    <a href="/posts/15062026_powerline_aluminum_mesh_bridge/20260418_140505.jpg" target="_blank">
+      <img src="/posts/15062026_powerline_aluminum_mesh_bridge/20260418_140505.jpg" alt="20260418_140505.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    </a>
+  
+    <a href="/posts/15062026_powerline_aluminum_mesh_bridge/20260418_141445.jpg" target="_blank">
+      <img src="/posts/15062026_powerline_aluminum_mesh_bridge/20260418_141445.jpg" alt="20260418_141445.jpg" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; transition: transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    </a>
+  
+</div>
+
+<p>Бизнес-результат (Ценность):
+Использование PLC-адаптеров в связке с инженерным подходом к балансировке трафика (H.265 + CBR) позволило сэкономить внушительную сумму на земляных работах и быстро вернуть объект в строй. Мы демистифицировали маркетинговые обещания вендора, определили реальный SLA в 88 Мбит/с на 25 метрах алюминия и настроили инфраструктуру так, чтобы она работала как швейцарские часы даже в условиях таких жестких физических ограничений.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/ru/">Aleksei Riumin | Senior Infrastructure Architect</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PowerLine on Aleksei Riumin | Senior Infrastructure Architect</title>
+    <link>http://localhost:1313/tags/powerline/</link>
+    <description>Recent content in PowerLine on Aleksei Riumin | Senior Infrastructure Architect</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jun 2026 12:00:00 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/powerline/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Physics vs. Marketing: Real AV1300 PowerLine Speeds on Old Aluminum Wire</title>
+      <link>http://localhost:1313/posts/15062026_powerline_aluminum_mesh_bridge/</link>
+      <pubDate>Mon, 15 Jun 2026 12:00:00 +0300</pubDate>
+      <guid>http://localhost:1313/posts/15062026_powerline_aluminum_mesh_bridge/</guid>
+      <description>How to salvage a remote network link when underground conduits fail. Testing TP-Link AV1300 over 2-core aluminum and optimizing IP cameras for constrained links.</description>
+    </item>
+  </channel>
+</rss>
