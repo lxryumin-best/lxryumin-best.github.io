@@ -67,7 +67,68 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script>
+</script><style>
+   
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/Logo.png');
+    background-size: 280px auto;
+    background-repeat: repeat;
+    transform: rotate(-25deg) scale(1.5);
+    transform-origin: center center;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+   
+  #content, .main, header, footer, .post-content, .profile, nav {
+    position: relative;
+    z-index: 1;
+  }
+
+   
+  .contact-footer-bar {
+    text-align: center;
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border, rgba(128,128,128,0.2));
+  }
+
+  .contact-footer-bar a.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.6rem;
+    border-radius: 6px;
+    background: var(--theme, #1d1e20);
+    border: 1px solid var(--border, rgba(128,128,128,0.3));
+    color: var(--primary, inherit);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .contact-footer-bar a.contact-btn:hover {
+    opacity: 0.8;
+  }
+
+  .contact-footer-bar .contact-email {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    font-family: monospace;
+  }
+</style>
+
 </head>
 <body class="list" id="top">
     <header class="header">
@@ -109,13 +170,23 @@
 </header>
 <main class="main"><div class="profile">
     <div class="profile_inner">
-        <img draggable="false" src="http://localhost:1313/avatar.jpg" alt="Aleksei Riumin" title="Aleksei Riumin"
-            height="150" width="150" />
+            <img draggable="false" src="http://localhost:1313/avatar.jpg" alt="Aleksei Riumin" title="Aleksei Riumin"
+                height="150" width="150" />
         <h1>Hello! I am Aleksei Riumin</h1>
-        <span>Senior IT Infrastructure &amp; Network Architect with 20+ years of experience. I transform complex business requirements into resilient, scalable, and secure IT foundations with zero-downtime execution.</span><div class="social-icons" >
+        <span>Senior IT Infrastructure &amp; Network Architect with 20+ years of experience. I transform complex business requirements into resilient, scalable, and secure IT foundations with zero-downtime execution. 📧 <a href="mailto:lxryumin@gmail.com">lxryumin@gmail.com</a></span><div class="social-icons" >
 </div>
 
         <div class="buttons">
+            <a class="button" href="/docs/" rel="noopener" title="Resume">
+                <span class="button-inner">
+                    Resume
+                </span>
+            </a>
+            <a class="button" href="/certificats/" rel="noopener" title="Certificates">
+                <span class="button-inner">
+                    Certificates
+                </span>
+            </a>
             <a class="button" href="/clients/" rel="noopener" title="Clients">
                 <span class="button-inner">
                     Clients
@@ -131,7 +202,7 @@
                     Client Testimonials
                 </span>
             </a>
-            <a class="button" href="mailto:nimxela@gmail.com" rel="noopener" title="Contact Me">
+            <a class="button" href="mailto:lxryumin@gmail.com" rel="noopener" title="Contact Me">
                 <span class="button-inner">
                     Contact Me
                 </span>
@@ -159,7 +230,13 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><div class="contact-footer-bar">
+  <a class="contact-btn" href="mailto:lxryumin@gmail.com" id="footer-contact-btn-en">
+    ✉️ Contact Me
+  </a>
+  <span class="contact-email">lxryumin@gmail.com</span>
+</div>
+
 
 <script>
     let menu = document.getElementById('menu');

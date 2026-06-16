@@ -1,0 +1,15 @@
+{{- /* Contact button shown on every page */ -}}
+<div class="contact-footer-bar">
+  {{- $isRu := (eq .Language.Lang "ru") -}}
+  {{- if $isRu }}
+  <a class="contact-btn" href="mailto:lxryumin@gmail.com" id="footer-contact-btn-ru">
+    ✉️ Написать мне
+  </a>
+  <span class="contact-email">lxryumin@gmail.com</span>
+  {{- else }}
+  <a class="contact-btn" href="mailto:lxryumin@gmail.com" id="footer-contact-btn-en">
+    ✉️ Contact Me
+  </a>
+  <span class="contact-email">lxryumin@gmail.com</span>
+  {{- end }}
+</div>

@@ -65,7 +65,68 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script>
+</script><style>
+   
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/Logo.png');
+    background-size: 280px auto;
+    background-repeat: repeat;
+    transform: rotate(-25deg) scale(1.5);
+    transform-origin: center center;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+   
+  #content, .main, header, footer, .post-content, .profile, nav {
+    position: relative;
+    z-index: 1;
+  }
+
+   
+  .contact-footer-bar {
+    text-align: center;
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border, rgba(128,128,128,0.2));
+  }
+
+  .contact-footer-bar a.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.6rem;
+    border-radius: 6px;
+    background: var(--theme, #1d1e20);
+    border: 1px solid var(--border, rgba(128,128,128,0.3));
+    color: var(--primary, inherit);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .contact-footer-bar a.contact-btn:hover {
+    opacity: 0.8;
+  }
+
+  .contact-footer-bar .contact-email {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    font-family: monospace;
+  }
+</style>
+
 </head>
 <body id="top">
     <header class="header">
@@ -127,33 +188,7 @@
 
 </div>
   </header> 
-  <div class="post-content md-content"><h3 id="trusted-by-industry-leaders">Trusted by Industry Leaders<a hidden class="anchor" aria-hidden="true" href="#trusted-by-industry-leaders">#</a></h3>
-<p>Over the years, I have had the privilege of acting as a strategic IT partner for a diverse range of enterprises, from federal retail networks to manufacturing plants and medical centers:</p>
-<ul>
-<li><strong>Bigam</strong> (Federal Retail Network of Tool &amp; Equipment Centers, Bigam-Invest LLC) — <a href="https://www.bigam.ru">www.bigam.ru</a></li>
-<li><strong>Simem</strong></li>
-<li><strong>Yarsport</strong></li>
-<li><strong>Spetsdetal</strong></li>
-<li><strong>Yartehpribor</strong> (Manufacturing &amp; Engineering LLC)</li>
-<li><strong>IP Nikonov</strong> (Individual Entrepreneur)</li>
-<li><strong>Shigolost</strong></li>
-<li><strong>Trade House RTI</strong> (Wholesale &amp; Distribution LLC)</li>
-<li><strong>Dental Center &ldquo;KIT&rdquo;</strong> (LLC)</li>
-<li><strong>Prodent</strong></li>
-<li><strong>IP Shalygin</strong> (Individual Entrepreneur)</li>
-<li><strong>Step Steel</strong> (Food Equipment Manufacturing Plant LLC)</li>
-<li><strong>Kuznetsov &amp; Co</strong></li>
-<li><strong>Yargosstroyexpertiza</strong></li>
-<li><strong>ITco</strong></li>
-<li><strong>Feedback</strong></li>
-<li><strong>Stanitsa</strong></li>
-<li><strong>TFI-Voda</strong> (Federal Retail Network LLC)</li>
-<li><strong>C-Art</strong></li>
-<li><strong>Metalling</strong></li>
-<li><strong>Serebrennikov</strong></li>
-<li><strong>Ship Engineering</strong></li>
-</ul>
-<p>Below are scanned copies of official appreciation letters and references from my corporate clients.</p>
+  <div class="post-content md-content"><p>Below are scanned copies of official appreciation letters and references from my corporate clients.</p>
 <div class="custom-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 2rem 0;">
   
     <a href="/testimonials/KIT%2006.2023.jpg" target="_blank">
@@ -311,7 +346,13 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><div class="contact-footer-bar">
+  <a class="contact-btn" href="mailto:lxryumin@gmail.com" id="footer-contact-btn-en">
+    ✉️ Contact Me
+  </a>
+  <span class="contact-email">lxryumin@gmail.com</span>
+</div>
+
 
 <script>
     let menu = document.getElementById('menu');

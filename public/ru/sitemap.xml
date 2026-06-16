@@ -87,5 +87,39 @@
                 />
   </url><url>
     <loc>http://localhost:1313/ru/clients/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:1313/clients/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru-ru"
+                href="http://localhost:1313/ru/clients/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/ru/docs/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:1313/docs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru-ru"
+                href="http://localhost:1313/ru/docs/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/ru/certificats/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:1313/certificats/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru-ru"
+                href="http://localhost:1313/ru/certificats/"
+                />
   </url>
 </urlset>

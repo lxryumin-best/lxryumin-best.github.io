@@ -48,11 +48,32 @@
 &lt;p&gt;I believe in a solid security foundation followed by advanced routing and orchestration:&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Certificates &amp; Qualifications — Aleksei Riumin</title>
+      <link>http://localhost:1313/certificats/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/certificats/</guid>
+      <description>Official MikroTik and Kaspersky certifications confirming high-level expertise in building secure enterprise networks and cybersecurity. Entrust your business IT infrastructure to a certified professional.</description>
+    </item>
+    <item>
       <title>Client Testimonials &amp; Official Recommendations</title>
       <link>http://localhost:1313/testimonials/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/testimonials/</guid>
       <description>Official letters of recommendation from B2B clients verifying successful enterprise IT infrastructure deployments, zero-downtime migrations, and secure network architectures.</description>
+    </item>
+    <item>
+      <title>My Valued Clients — B2B IT Partner for Business</title>
+      <link>http://localhost:1313/clients/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/clients/</guid>
+      <description>Over 25 B2B clients across industries: manufacturing, healthcare, construction, retail, and agriculture. Strategic IT partner for infrastructure deployment, networking, and digital solutions.</description>
+    </item>
+    <item>
+      <title>Resume — Aleksei Riumin | Senior IT Infrastructure Architect</title>
+      <link>http://localhost:1313/docs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/</guid>
+      <description>Professional resume of Aleksei Riumin — Senior IT Infrastructure &amp;amp; Network Architect with 20&#43; years of experience. Expert in enterprise networks, server virtualization, cybersecurity, and zero-downtime IT migrations.</description>
     </item>
   </channel>
 </rss>

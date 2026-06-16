@@ -18,13 +18,19 @@ defaultContentLanguage = 'en'
   [languages.en.params.profileMode]
     enabled = true
     title = "Hello! I am Aleksei Riumin"
-    subtitle = "Senior IT Infrastructure & Network Architect with 20+ years of experience. I transform complex business requirements into resilient, scalable, and secure IT foundations with zero-downtime execution."
+    subtitle = "Senior IT Infrastructure & Network Architect with 20+ years of experience. I transform complex business requirements into resilient, scalable, and secure IT foundations with zero-downtime execution. 📧 lxryumin@gmail.com"
     imageUrl = "avatar.jpg" # Сюда мы позже загрузим ваше фото
     imageWidth = 150
     imageHeight = 150
     imageTitle = "Aleksei Riumin"
     
     # Кнопки на главной странице
+    [[languages.en.params.profileMode.buttons]]
+      name = "Resume"
+      url = "/docs/"
+    [[languages.en.params.profileMode.buttons]]
+      name = "Certificates"
+      url = "/certificats/"
     [[languages.en.params.profileMode.buttons]]
       name = "Clients"
       url = "/clients/"
@@ -36,7 +42,7 @@ defaultContentLanguage = 'en'
       url = "/testimonials/"
     [[languages.en.params.profileMode.buttons]]
       name = "Contact Me"
-      url = "mailto:nimxela@gmail.com"
+      url = "mailto:lxryumin@gmail.com"
 
 # --- РУССКАЯ ВЕРСИЯ ---
 [languages.ru]
@@ -52,11 +58,19 @@ defaultContentLanguage = 'en'
   [languages.ru.params.profileMode]
     enabled = true
     title = "Здравствуйте! Я Алексей Рюмин"
-    subtitle = "Senior IT Infrastructure Architect (20+ лет опыта). Я проектирую отказоустойчивые серверные и сетевые инфраструктуры для бизнеса. Мой приоритет — безопасность данных и миграции без минутного простоя."
+    subtitle = "Senior IT Infrastructure Architect (20+ лет опыта). Я проектирую отказоустойчивые серверные и сетевые инфраструктуры для бизнеса. Мой приоритет — безопасность данных и миграции без минутного простоя. 📧 lxryumin@gmail.com"
     imageUrl = "avatar.jpg"
     imageWidth = 150
     imageHeight = 150
     imageTitle = "Алексей Рюмин"
+
+        [[languages.ru.params.profileMode.buttons]]
+      name = "Резюме"
+      url = "/ru/docs/"
+
+        [[languages.ru.params.profileMode.buttons]]
+      name = "Сертификаты"
+      url = "/ru/certificats/"
 
     [[languages.ru.params.profileMode.buttons]]
       name = "Клиенты"
@@ -69,7 +83,7 @@ defaultContentLanguage = 'en'
     [[languages.ru.params.profileMode.buttons]]
       name = "Благодарственные письма"
       url = "/ru/testimonials/"
-      
+
     [[languages.ru.params.profileMode.buttons]]
       name = "Связаться со мной"
-      url = "mailto:nimxela@gmail.com"
+      url = "mailto:lxryumin@gmail.com"

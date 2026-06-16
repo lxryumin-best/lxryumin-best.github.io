@@ -130,6 +130,18 @@
                 href="http://localhost:1313/ru/categories/"
                 />
   </url><url>
+    <loc>http://localhost:1313/certificats/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:1313/certificats/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru-ru"
+                href="http://localhost:1313/ru/certificats/"
+                />
+  </url><url>
     <loc>http://localhost:1313/testimonials/</loc>
     <xhtml:link
                 rel="alternate"
@@ -140,6 +152,30 @@
                 rel="alternate"
                 hreflang="ru-ru"
                 href="http://localhost:1313/ru/testimonials/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/clients/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:1313/clients/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru-ru"
+                href="http://localhost:1313/ru/clients/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/docs/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="http://localhost:1313/docs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ru-ru"
+                href="http://localhost:1313/ru/docs/"
                 />
   </url>
 </urlset>

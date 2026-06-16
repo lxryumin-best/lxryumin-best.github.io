@@ -1,0 +1,23 @@
+<div class="certificates-grid" style="display: flex; flex-direction: column; gap: 3rem; margin: 2rem 0;">
+  {{ range .Page.Resources.ByType "image" }}
+    {{ $name := .Name }}
+    <div class="certificate-item" style="display: flex; flex-direction: column; align-items: center; background: var(--entry); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding-bottom: 1.5rem;">
+      <a href="{{ .RelPermalink }}" target="_blank" rel="noopener" style="display: block; width: 100%;">
+        <img src="{{ .RelPermalink }}" alt="{{ $name }}"
+          style="width: 100%; max-height: 500px; object-fit: contain; background: #fff; padding: 1rem; transition: transform 0.3s ease; cursor: zoom-in;"
+          onmouseover="this.style.transform='scale(1.02)'"
+          onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <div class="certificate-caption" style="width: 100%; padding: 1rem 1.5rem 0; text-align: center;">
+        {{ with $.Page.Params.cert_descriptions }}
+          {{ range . }}
+            {{ if eq .file $name }}
+              <h3 style="font-size: 1.1rem; margin: 0 0 0.5rem; font-weight: 700;">{{ .title }}</h3>
+              <p style="margin: 0; opacity: 0.85; font-size: 0.95rem; line-height: 1.6;">{{ .description }}</p>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</div>
