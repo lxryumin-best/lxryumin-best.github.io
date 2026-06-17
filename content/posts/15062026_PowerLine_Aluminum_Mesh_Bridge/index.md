@@ -6,10 +6,10 @@ description: "How to salvage a remote network link when underground conduits fai
 tags: [PowerLine, Infrastructure, Mesh, IPCameras, Networking]
 ---
 
-**The Context (Бизнес-задача / Проблема):**
+**The Context (Business Challenge / Problem):**
 Ground movement at the client's site crushed the underground mounting pipe carrying the main network lines between the primary building and a remote garage. Trenching and laying a new conduit was economically unviable in the short term. The business required continuous network access in the remote facility to support a TP-Link Mesh zone, an IP digital intercom, and IP surveillance cameras. The only available physical medium was the existing 220V power line—an old, 2-core aluminum cable without proper grounding. 
 
-**The Architecture & Work (Решение):**
+**The Architecture & Work (Solution):**
 We deployed the TP-Link TL-PA8033P KIT (AV1300) to bridge the gap over the electrical wiring. As an architect, I never rely on the "1300 Mbps" marketing stickers. To establish a realistic SLA, we performed baseline and real-world testing. Under ideal "greenhouse" conditions (adapters plugged into each other), throughput maxed out at ~262 Mbps. 
 
 However, physics dictates the rules in production. On the 25-meter run of 2-core aluminum, we achieved a stable 88 Mbps. On a longer 42-meter branch, it dropped to 59 Mbps. While 88 Mbps is sufficient, combining Mesh traffic, VoIP (intercom), and constant video streams on a shared collision domain requires strict resource management. Instead of complex VLAN segmentation which might overhead the PLC link, we tackled the payload directly. We reconfigured all remote IP cameras to use the H.265 codec with a reduced frame rate and Constant Bitrate (CBR) to prevent I-frame spikes from saturating the 88 Mbps link.
@@ -43,5 +43,5 @@ echo "[SUCCESS] Camera streams constrained. PLC link reserved for Mesh/VoIP."
 
 {{< gallery >}}
 
-The Takeaway (Бизнес-результат):
+**The Takeaway (Business Value):**
 By understanding the physical limitations of the medium and compensating through application-level optimization (H.265 + CBR), we restored full infrastructure connectivity without expensive excavation work. We transformed a potentially unstable 88 Mbps bottleneck into a predictable, guaranteed SLA pipeline where surveillance, VoIP, and Wi-Fi Mesh coexist seamlessly.
