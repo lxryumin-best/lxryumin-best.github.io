@@ -44,4 +44,4 @@ echo "[SUCCESS] Camera streams constrained. PLC link reserved for Mesh/VoIP."
 {{< gallery >}}
 
 **The Takeaway (Business Value):**
-By understanding the physical limitations of the medium and compensating through application-level optimization (H.265 + CBR), we restored full infrastructure connectivity without expensive excavation work. We transformed a potentially unstable 88 Mbps bottleneck into a predictable, guaranteed SLA pipeline where surveillance, VoIP, and Wi-Fi Mesh coexist seamlessly.
+By understanding the physical limitations of the medium and compensating through application-level optimization (H.265 + CBR), we restored full infrastructure connectivity without expensive excavation work. We transformed a potentially unstable 88 Mbps bottleneck into a predictable, guaranteed SLA pipeline where surveillance, VoIP, and Wi-Fi Mesh coexist seamlessly.
