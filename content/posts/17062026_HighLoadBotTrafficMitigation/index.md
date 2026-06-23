@@ -3,7 +3,7 @@ title: "Mitigating 99% Disk Exhaustion Caused by AI & SEO Scrapers"
 date: 2026-06-17T12:00:00+03:00
 draft: false
 description: "How we resolved a critical server disk space issue on a high-traffic sports portal by identifying and blocking aggressive AI bots and SEO crawlers."
-tags: [Linux, Apache, High Load, SEO Bots, Troubleshooting]
+tags: ["Linux", "Apache", "High Load", "SEO Bots", "Troubleshooting"]
 ---
 
 **The Context (Business Challenge / Problem):**

@@ -2,6 +2,7 @@
 title: "Welcome to My Digital Garden: Infrastructure & DevOps"
 date: 2026-06-14T12:00:00+03:00
 draft: false
+description: "About my expertise as an Infrastructure Architect, System Administrator, and Independent IT Consultant — from network engineering to cloud-native solutions."
 tags: ["architecture", "consulting", "networking"]
 ---
 

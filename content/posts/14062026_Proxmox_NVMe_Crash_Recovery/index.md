@@ -3,7 +3,7 @@ title: "Proxmox Server Crash: Recovering XFS Data After a Catastrophic NVMe Fail
 date: 2026-06-14T22:41:25+03:00
 draft: false
 description: "How to handle a sudden NVMe controller failure in Proxmox VE. Step-by-step XFS troubleshooting, read-only data salvage, and hardware migration."
-tags: [Proxmox VE, XFS Recovery, NVMe, Incident Response, Data Salvage]
+tags: ["Proxmox VE", "XFS Recovery", "NVMe", "Incident Response", "Data Salvage"]
 ---
 
 **The Context (Business Challenge / Problem):**

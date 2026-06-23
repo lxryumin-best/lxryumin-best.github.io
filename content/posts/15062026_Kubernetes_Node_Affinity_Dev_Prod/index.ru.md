@@ -3,7 +3,7 @@ title: "Экономичный Kubernetes: Аппаратная изоляция
 date: 2026-06-15T10:00:00+03:00
 draft: false
 description: "Как безопасно запустить Dev и Prod среды внутри одного Kubernetes-кластера с помощью Node Affinity, сэкономив до 40% на инфраструктуре B2B-клиента."
-tags: [Kubernetes, CKA, Infrastructure, Architecture, CostOptimization]
+tags: ["Kubernetes", "CKA", "Infrastructure", "Architecture", "CostOptimization"]
 ---
 
 **Контекст (Бизнес-задача / Проблема):**

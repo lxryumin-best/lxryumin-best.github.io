@@ -3,7 +3,7 @@ title: "Cost-Effective Kubernetes: Hardware Isolating Dev & Prod Environments in
 date: 2026-06-15T10:00:00+03:00
 draft: false
 description: "Learn how to use Kubernetes Node Affinity to safely run Development and Production environments within a single cluster, saving B2B infrastructure costs."
-tags: [Kubernetes, CKA, Infrastructure, Architecture, CostOptimization]
+tags: ["Kubernetes", "CKA", "Infrastructure", "Architecture", "CostOptimization"]
 ---
 
 **The Context (Business Challenge / Problem):**

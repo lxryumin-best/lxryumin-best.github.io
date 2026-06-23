@@ -3,7 +3,7 @@ title: "Physics vs. Marketing: Real AV1300 PowerLine Speeds on Old Aluminum Wire
 date: 2026-06-15T12:00:00+03:00
 draft: false
 description: "How to salvage a remote network link when underground conduits fail. Testing TP-Link AV1300 over 2-core aluminum and optimizing IP cameras for constrained links."
-tags: [PowerLine, Infrastructure, Mesh, IPCameras, Networking]
+tags: ["PowerLine", "Infrastructure", "Mesh", "IPCameras", "Networking"]
 ---
 
 **The Context (Business Challenge / Problem):**
@@ -44,4 +44,5 @@ echo "[SUCCESS] Camera streams constrained. PLC link reserved for Mesh/VoIP."
 {{< gallery >}}
 
 **The Takeaway (Business Value):**
-By understanding the physical limitations of the medium and compensating through application-level optimization (H.265 + CBR), we restored full infrastructure connectivity without expensive excavation work. We transformed a potentially unstable 88 Mbps bottleneck into a predictable, guaranteed SLA pipeline where surveillance, VoIP, and Wi-Fi Mesh coexist seamlessly.
+By understanding the physical limitations of the medium and compensating through application-level optimization (H.265 + CBR), we restored full infrastructure connectivity without expensive excavation work. We transformed a potentially unstable 88 Mbps bottleneck into a predictable, guaranteed SLA pipeline where surveillance, VoIP, and Wi-Fi Mesh coexist seamlessly.
+

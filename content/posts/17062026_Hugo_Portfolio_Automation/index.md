@@ -3,7 +3,7 @@ title: "Automating a Senior Architect's Portfolio: Hugo, GitHub Pages, and AI"
 date: 2026-06-17T12:00:00+03:00
 draft: false
 description: "How to build a zero-maintenance, blazingly fast portfolio using Hugo, GitHub Actions, VS Code, and Claude Opus 4.6 as an automated translator and technical writer."
-tags: [Hugo, CI/CD, GitHub Pages, Automation, Claude AI, IaC]
+tags: ["Hugo", "CI/CD", "GitHub Pages", "Automation", "Claude AI", "IaC"]
 ---
 
 **The Context (Business Challenge / Problem):**

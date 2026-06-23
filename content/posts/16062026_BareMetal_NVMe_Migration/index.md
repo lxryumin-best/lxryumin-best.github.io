@@ -3,7 +3,7 @@ title: "Seamless Bare-Metal Migration: NVMe Lift-and-Shift Between Identical Nod
 date: 2026-06-16T11:31:39+03:00
 draft: false
 description: "How to execute a fast bare-metal hardware swap using NVMe migration on identical chipsets, mitigating TPM, Secure Boot, and network configuration conflicts."
-tags: [Hardware Migration, NVMe, Bare-Metal, B2B IT Support, Infrastructure]
+tags: ["Hardware Migration", "NVMe", "Bare-Metal", "B2B IT Support", "Infrastructure"]
 ---
 
 **The Context (Business Challenge / Problem):**
