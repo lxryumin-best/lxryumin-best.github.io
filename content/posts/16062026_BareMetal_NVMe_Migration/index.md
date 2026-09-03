@@ -23,8 +23,8 @@ Get-Tpm | Select-Object TpmPresent, TpmReady, TpmEnabled
 
 # Post-migration: Re-applying the static IP configuration to the new NIC MAC address
 $NewNic = Get-NetAdapter | Where-Object {$_.Status -eq "Up"}
-New-NetIPAddress -InterfaceIndex $NewNic.InterfaceIndex -IPAddress "192.168.10.50" -PrefixLength 24 -DefaultGateway "192.168.10.1"
-Set-DnsClientServerAddress -InterfaceIndex $NewNic.InterfaceIndex -ServerAddresses ("192.168.10.10", "8.8.8.8")
+New-NetIPAddress -InterfaceIndex $NewNic.InterfaceIndex -IPAddress "<SERVER_IP>" -PrefixLength 24 -DefaultGateway "<DEFAULT_GATEWAY>"
+Set-DnsClientServerAddress -InterfaceIndex $NewNic.InterfaceIndex -ServerAddresses ("<DNS_SERVER_1>", "<DNS_SERVER_2>")
 ```
 
 After physically transferring the NVMe drive and seating the CPU cooler, I updated the UEFI firmware on the new board to match the client's security baseline, cleared the old TPM keys, and securely booted into the preserved OS environment.

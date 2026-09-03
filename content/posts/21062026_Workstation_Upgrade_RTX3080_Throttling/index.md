@@ -1,8 +1,11 @@
+---
 title: "Architect's Workstation Upgrade & RTX 3080 Thermal Throttling Analysis"
 date: 2026-06-21T12:00:00+03:00
 draft: false
 description: "Upgrading a local infrastructure architect's lab. Diagnosing severe RTX 3080 thermal throttling and planning VRM/VRAM maintenance to restore 320W TDP."
 tags: [Hardware, Workstation, RTX3080, Troubleshooting]
+---
+
 The Context (Business Challenge / Problem):
 Maintaining an optimal local environment is critical for an Infrastructure Architect working with Proxmox, Docker, and preparing for the CKA (Kubernetes) certification. I recently migrated my primary workstation to an Intel Core i5-12400 with 32GB of DDR4—currently the most cost-effective platform for running virtualized local labs. However, during stress testing, the Palit RTX 3080 GPU exhibited severe thermal throttling. Instead of operating at its design power envelope of 320W-330W under heavy load, the card drastically downclocked, dropping power consumption to just 140W to prevent critical silicon damage.
 The Architecture & Work (Solution):

@@ -21,9 +21,9 @@ tags: ["PowerLine", "Infrastructure", "Mesh", "Видеонаблюдение", 
 # Оптимизация потоков IP-камер (Dahua/Hikvision) для узких PowerLine (PLC) линков
 # Принудительно включаем H.265, 15 FPS и жесткий битрейт (CBR) 2048 Kbps
 
-CAMERAS=("192.168.20.51" "192.168.20.52")
+CAMERAS=("<CAMERA_IP_1>" "<CAMERA_IP_2>")
 USER="admin"
-PASS="SuperSecretAdminPass!"
+PASS="${CAMERA_PASSWORD:?Задайте CAMERA_PASSWORD в окружении}"
 
 for IP in "${CAMERAS[@]}"; do
   echo "[INFO] Обновление профиля видео для камеры: $IP"
